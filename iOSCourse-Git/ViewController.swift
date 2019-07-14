@@ -10,9 +10,20 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var clockLabel: UILabel!
+    
+    var timer = Timer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(tick), userInfo: nil, repeats: true)
+    }
+    
+    @objc func tick() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:mm:ss"
+        clockLabel.text = formatter.string(from: Date())
     }
 }
 
